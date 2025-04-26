@@ -46,3 +46,68 @@ Your Measure Name =
        RIGHT("0" & InSeconds, 2)
 RETURN TimeFormat
 ```
+
+Method2:
+Input Must be in minutes, Final Result Would be in d:HH:mm:ss Format
+
+```dax
+Your Measure Name=
+   VAR Calculated_Measure =
+       [Calculated Metric Duration in Minutes]
+   VAR inDays =
+       Calculated_Measure /1440
+   VAR InHours =
+       (inDays - INT(inDays)) * 24
+
+   VAR InMinutes =
+       (InHours - INT(InHours)) * 60
+  
+   VAR IntHours = INT(InHours)
+   VAR INTMinutes = INT(InMinutes)
+   VAR RemainingMinutes =
+       INT(
+           MOD(
+               inMinutes,
+               60
+           )
+       )
+   VAR InSeconds =
+   INT((inMinutes - INT(inMinutes)) * 60)
+
+   VAR HoursTimeFormat =
+       SWITCH(
+           TRUE(),
+           IntHours < 10,
+           "0" & IntHours,
+           IntHours >= 10,
+           IntHours
+       )
+   VAR MinutesTimeFormat =
+       SWITCH(
+           TRUE(),
+           INTMinutes < 10,
+           "0" & INTMinutes,
+           INTMinutes >= 10,
+           INTMinutes
+       )
+   VAR SecondsTimeFormat =
+       SWITCH(
+           TRUE(),
+           InSeconds < 10,
+           "0" & InSeconds,
+           InSeconds >= 10,
+           InSeconds
+       )
+
+   VAR TimeFormat=
+       INT(inDays)
+       & ":"
+       & HoursTimeFormat
+       & ":"
+       & MinutesTimeFormat
+       & ":"
+       & SecondsTimeFormat
+
+RETURN TimeFormat
+
+```
