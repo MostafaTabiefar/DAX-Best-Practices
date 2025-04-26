@@ -1,6 +1,6 @@
 ---
-title: "DAX Duration to Time Format Conversion"
-description: "Convert numeric durations to HH:mm:ss or d:HH:mm:ss formats in Power BI"
+Title: "DAX Duration to Time Format Conversion"
+Description: "Convert numeric durations to HH:mm:ss or d:HH:mm:ss formats in Power BI"
 ---
 
 # Duration to Time Format Conversion
