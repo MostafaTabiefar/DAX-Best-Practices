@@ -5,8 +5,37 @@ description: "Convert numeric durations to HH:mm:ss or d:HH:mm:ss formats in Pow
 
 # Duration to Time Format Conversion
 
-
 ## Method 1: Seconds to HH:mm:ss
+**Input**: Duration in seconds  
+**Output**: `HH:mm:ss`
+
+```dax
+Your Measure Name = 
+VAR TotalSeconds = [YourMeasure]
+RETURN
+FORMAT(TIME(0,0,TotalSeconds), "HH:mm:ss")
+```
+
+## Method 2: Duration in minutes
+**Input**: Duration in minutes  
+**Output**: `d:HH:mm:ss`
+
+```dax
+Your Measure Name = 
+VAR TotalMinutes = [YourMeasure]
+VAR Days = QUOTIENT(TotalMinutes, 1440)
+VAR Remaining = MOD(TotalMinutes, 1440)
+RETURN
+DAX.Format("{0}:{1}:{2}:{3}", 
+  Days,
+  FORMAT(QUOTIENT(Remaining, 60), "00"),
+  FORMAT(MOD(Remaining, 60), "00"),
+  "00" // Seconds placeholder
+)
+```
+
+
+## Method 3: Seconds to HH:mm:ss
 **Input**: Duration in seconds  
 **Output**: `HH:mm:ss`
 
@@ -54,7 +83,7 @@ Your Measure Name =
 RETURN TimeFormat
 ```
 
-## Method 2: Minutes to d:HH:mm:ss
+## Method 4: Minutes to d:HH:mm:ss
 **Input**: Duration in minutes  
 **Output**: `d:HH:mm:ss`
 
