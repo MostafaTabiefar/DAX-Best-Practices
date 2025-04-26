@@ -1,7 +1,14 @@
-# Converting Duration into TimeFormat
+---
+title: "DAX Duration to Time Format Conversion"
+description: "Convert numeric durations to HH:mm:ss or d:HH:mm:ss formats in Power BI"
+---
 
-Method 1:
-Input Must be in seconds or you may multiply it by 60 if it is in minutes, Final Result Would be in HH:mm:ss Format
+# Duration to Time Format Conversion
+
+
+## Method 1: Seconds to HH:mm:ss
+**Input**: Duration in seconds  
+**Output**: `HH:mm:ss`
 
 ```dax
 Your Measure Name =
@@ -47,8 +54,9 @@ Your Measure Name =
 RETURN TimeFormat
 ```
 
-Method2:
-Input Must be in minutes, Final Result Would be in d:HH:mm:ss Format
+## Method 2: Minutes to d:HH:mm:ss
+**Input**: Duration in minutes  
+**Output**: `d:HH:mm:ss`
 
 ```dax
 Your Measure Name=
